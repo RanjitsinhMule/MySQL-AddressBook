@@ -1,0 +1,145 @@
+//UC-1
+
+mysql> create database AddressBook_Service;
+Query OK, 1 row affected (0.01 sec)
+
+//UC-2
+
+mysql> use AddressBook_Service;
+Database changed
+mysql> create table AddressBook(firstname varchar(20), lastname varchar(20),address varchar(20),city varchar(20),State varchar(20),zip int, PhoneNumber double);
+Query OK, 0 rows affected (0.02 sec)
+
+//UC-3
+
+mysql>  insert into AddressBook(firstname, lastname, address, city, State, zip, PhoneNumber, email) values("Rakesh", "Madhu", "Hyd", "Hyd", "TS", 412545, 98884568885, "rakesh@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into AddressBook(firstname, lastname, address, city, State, zip, PhoneNumber, email) values("falguni","S","UP","UP","UP", 543002,9700654000,"falguni@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into AddressBook(firstname, lastname, address, city, State, zip, PhoneNumber, email) values("Bhagvandas","k","Amrt","Vijaywada","AP",423001,9092780008,"das@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from AddressBook;
++------------+----------+---------+-----------+-------+--------+-------------+-------------------+
+| firstname  | lastname | address | city      | State | zip    | PhoneNumber | email             |
++------------+----------+---------+-----------+-------+--------+-------------+-------------------+
+| Anirban    | R        | kol     | kol       | WB    | 425425 |  9554647555 | anirban@gmail.com |
+| Rakesh     | Madhu    | Hyd     | Hyd       | TS    | 412545 | 98884568885 | rakesh@gmail.com  |
+| falguni    | S        | UP      | UP        | UP    | 543002 |  9700654000 | falguni@gmail.com |
+| Bhagvandas | k        | Amrt    | Vijaywada | AP    | 423001 |  9092780008 | das@gmail.com     |
++------------+----------+---------+-----------+-------+--------+-------------+-------------------+
+4 rows in set (0.00 sec)
+
+//UC-4
+
+mysql> update AddressBook set firstname='Ranjitsinh' where firstname='Ranjit';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AddressBook;
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+| firstname  | lastname | address  | city      | State | zip    | PhoneNumber | email             |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+| Anirban    | R        | kol      | kol       | WB    | 425425 |  9554647555 | anirban@gmail.com |
+| Rakesh     | Madhu    | Hyd      | Hyd       | TS    | 412545 | 98884568885 | rakesh@gmail.com  |
+| falguni    | S        | UP       | UP        | UP    | 543002 |  9700654000 | falguni@gmail.com |
+| Bhagvandas | k        | Amrt     | Vijaywada | AP    | 423001 |  9092780008 | das@gmail.com     |
+| Ranjitsinh | Mule     | Talegaon | Pune      | MH    | 413324 |  7387882523 | rmules@gmail.com  |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+5 rows in set (0.00 sec)
+
+//UC-5
+
+mysql> delete from AddressBook where firstname='Anirban';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from AddressBook;
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+| firstname  | lastname | address  | city      | State | zip    | PhoneNumber | email             |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+| Rakesh     | Madhu    | Hyd      | Hyd       | TS    | 412545 | 98884568885 | rakesh@gmail.com  |
+| falguni    | S        | UP       | UP        | UP    | 543002 |  9700654000 | falguni@gmail.com |
+| Bhagvandas | k        | Amrt     | Vijaywada | AP    | 423001 |  9092780008 | das@gmail.com     |
+| Ranjitsinh | Mule     | Talegaon | Pune      | MH    | 413324 |  7387882523 | rmules@gmail.com  |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+
+4 rows in set (0.00 sec)
+
+//UC-6
+
+mysql> select * from AddressBook where city='pune';
++------------+----------+----------+------+-------+--------+-------------+------------------+
+| firstname  | lastname | address  | city | State | zip    | PhoneNumber | email            |
++------------+----------+----------+------+-------+--------+-------------+------------------+
+| Ranjitsinh | Mule     | Talegaon | Pune | MH    | 413324 |  7387882523 | rmules@gmail.com |
++------------+----------+----------+------+-------+--------+-------------+------------------+
+1 row in set (0.00 sec)
+
+//UC-7
+
+mysql> select COUNT(*) from AddressBook where city='Pune';
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+//UC-8
+
+mysql> select firstname from AddressBook order by city;
++------------+
+| firstname  |
++------------+
+| Rakesh     |
+| Ranjitsinh |
+| falguni    |
+| Bhagvandas |
++------------+
+4 rows in set (0.00 sec)
+
+//UC-9
+
+mysql> update addressbook set type='Friend' where firstName = 'Anirban';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AddressBook;
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+--------+
+| firstname  | lastname | address  | city      | State | zip    | PhoneNumber | email             | type   |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+--------+
+| Rakesh     | Madhu    | Hyd      | Hyd       | TS    | 412545 | 98884568885 | rakesh@gmail.com  | Friend |
+| falguni    | S        | UP       | UP        | UP    | 543002 |  9700654000 | falguni@gmail.com | Friend |
+| Bhagvandas | k        | Amrt     | Vijaywada | AP    | 423001 |  9092780008 | das@gmail.com     | Friend |
+| Ranjitsinh | Mule     | Talegaon | Pune      | MH    | 413324 |  7387882523 | rmules@gmail.com  | Family |
+| Anirban    | R        | kol      | kol       | WB    | 425425 |  9554647555 | anirban@gmail.com | Friend |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update addressbook set type='Profession' where firstname = 'Rakesh';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AddressBook;
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+------------+
+| firstname  | lastname | address  | city      | State | zip    | PhoneNumber | email             | type       |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+------------+
+| Rakesh     | Madhu    | Hyd      | Hyd       | TS    | 412545 | 98884568885 | rakesh@gmail.com  | Profession |
+| falguni    | S        | UP       | UP        | UP    | 543002 |  9700654000 | falguni@gmail.com | Friend     |
+| Bhagvandas | k        | Amrt     | Vijaywada | AP    | 423001 |  9092780008 | das@gmail.com     | Friend     |
+| Ranjitsinh | Mule     | Talegaon | Pune      | MH    | 413324 |  7387882523 | rmules@gmail.com  | Family     |
+| Anirban    | R        | kol      | kol       | WB    | 425425 |  9554647555 | anirban@gmail.com | Friend     |
++------------+----------+----------+-----------+-------+--------+-------------+-------------------+------------+
+5 rows in set (0.00 sec)
+
+//UC-10
+
+mysql> select COUNT(type) from addressbook where type='Friend';
++-------------+
+| COUNT(type) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
